@@ -1,10 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="assets"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LWJGL Test"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.8.0_291"/>
 	<classpathentry kind="lib" path="json-simple-1.1.1.jar"/>
 	<classpathentry kind="lib" path="joml-1.9.24.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LWJGL Test"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-assimp.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-bgfx.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-cuda.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-egl.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-glfw.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-jawt.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-jemalloc.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-libdivide.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-llvm.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-lmdb.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-lz4.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-meow.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-nanovg.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-nfd.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-nuklear.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-odbc.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-openal.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-opencl.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-opengl.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-openvr.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-opus.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-ovr.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-par.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-remotery.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-rpmalloc.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-shaderc.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-sse.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-stb.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-tinyexr.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-tinyfd.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-tootle.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-vma.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-vulkan.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-xxhash.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-yoga.jar"/>
+	<classpathentry kind="lib" path="LWJGL3/lwjgl-zstd.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

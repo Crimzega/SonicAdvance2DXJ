@@ -1,0 +1,32 @@
+plugins{
+	id 'java'
+	id 'eclipse'
+}
+
+repositories{
+	mavenCentral()
+}
+
+sourceCompatibility = targetCompatibility = 1.8
+
+dependencies{
+	implementation platform('org.lwjgl:lwjgl-bom:3.3.1')
+	implementation 'com.google.code.gson:gson:2.9.0'
+	implementation 'com.google.guava:guava:30.0-jre'
+	implementation 'net.sf.jopt-simple:jopt-simple:5.0.4'
+	implementation 'org.lwjgl:lwjgl'
+	implementation 'org.lwjgl:lwjgl-bgfx'
+	implementation 'org.lwjgl:lwjgl-glfw'
+	implementation 'org.lwjgl:lwjgl-openal'
+	implementation 'org.lwjgl:lwjgl-opengl'
+	implementation 'org.lwjgl:lwjgl-stb'
+	implementation 'org.lwjgl:lwjgl-vulkan'
+	implementation 'org.lwjgl:lwjgl-zstd'
+	runtimeOnly 'org.lwjgl:lwjgl::natives-windows'
+	runtimeOnly 'org.lwjgl:lwjgl-bgfx::natives-windows'
+	runtimeOnly 'org.lwjgl:lwjgl-glfw::natives-windows'
+	runtimeOnly 'org.lwjgl:lwjgl-openal::natives-windows'
+	runtimeOnly 'org.lwjgl:lwjgl-opengl::natives-windows'
+	runtimeOnly 'org.lwjgl:lwjgl-stb::natives-windows'
+	runtimeOnly 'org.lwjgl:lwjgl-zstd::natives-windows'
+}

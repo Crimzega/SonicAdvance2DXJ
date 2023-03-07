@@ -1,4 +1,13 @@
+/datatypes/
+/functionholders/
+/sonicsounds/
+/sonicsprites/
+/badniks/
 /main/
-/scenes/
-/player/
+/misc/
 /objects/
+/player/
+/rendering/
+/scenes/
+/shapes/
+/voiceclips/
