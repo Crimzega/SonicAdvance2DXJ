@@ -1,9 +1,7 @@
 package functionholders;
 
-import static java.lang.Math.*;
 import static functionholders.MathFunctions.*;
 import static functionholders.ListFunctions.*;
-import static functionholders.DebugFunctions.*;
 
 import datatypes.Shape;
 import datatypes.Vector;

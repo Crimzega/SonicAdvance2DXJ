@@ -1,13 +1,9 @@
 package main;
 
-import java.awt.Color;
-import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 
-import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -15,43 +11,15 @@ import javax.sound.sampled.FloatControl;
 
 import org.lwjgl.BufferUtils;
 
-import datatypes.Animation;
-import datatypes.TiledJSON;
-import datatypes.Tilemap;
-import misc.Background;
-import misc.HUD;
 import rendering.Image;
-import rendering.Shader;
 import scenes.Scene;
 
-import static functionholders.GraphicsFunctions.*;
-
-public class Loader {
+public class Loader{
+	
 	private static Loader singleton = null;
-	
 	public static final String TITLE = "Sonic Advance 2 DX";
-	
 	public static Scene currentScene;
 	public static boolean fullscreen;
-	
-	/*
-	public static int joyUp = 1;
-	public static int joyDown = 1;
-	public static int joyLeft = 0;
-	public static int joyRight = 0;
-	public static int joyA = 0;
-	public static int joyB = 1;
-	public static int joyX = 2;
-	public static int joyY = 3;
-	public static int joyStart = 6;
-	public static int joyBack = 7;
-	
-	public static int joyUpAxis = -1;
-	public static int joyDownAxis = 1;
-	public static int joyLeftAxis = -1;
-	public static int joyRightAxis = 1;
-	*/
-	
 	public static int joyUp = 16;
 	public static int joyDown = 18;
 	public static int joyLeft = 19;
@@ -62,20 +30,16 @@ public class Loader {
 	public static int joyY = 3;
 	public static int joyStart = 8;
 	public static int joyBack = 9;
-	
 	public static int joyUpAxis = 0;
 	public static int joyDownAxis = 0;
 	public static int joyLeftAxis = 0;
 	public static int joyRightAxis = 0;
-	
 	public static int graphicsWidth;
 	public static int graphicsHeight;
-	
 	public static int fps = 60;
 	public static int scale = 2;
 	public static int width = 240 * 4;
 	public static int height = 160 * 4;
-	
 	public static ByteBuffer[] idleAnim;
 	public static ByteBuffer[] runSlowestAnim;
 	public static ByteBuffer[] runSlowAnim;
@@ -109,11 +73,9 @@ public class Loader {
 	public static ByteBuffer[] backflipAnim;
 	public static ByteBuffer[] helixAnim;
 	public static ByteBuffer[] grindAnim;
-	
 	public static ByteBuffer[] spindashDustAnim;
 	public static ByteBuffer[] spindashChargeDustAnim;
 	public static ByteBuffer[] doubleShieldAnim;
-	
 	public static ByteBuffer[] spring0Anim;
 	public static ByteBuffer[] spring1Anim;
 	public static ByteBuffer[] spring2Anim;
@@ -126,35 +88,27 @@ public class Loader {
 	public static ByteBuffer[] spring9Anim;
 	public static ByteBuffer[] spring10Anim;
 	public static ByteBuffer[] spring11Anim;
-	
 	public static ByteBuffer[] blueSpring0Anim;
 	public static ByteBuffer[] blueSpring1Anim;
-	
 	public static ByteBuffer[] dashPad;
 	public static ByteBuffer[] ringAnim;
 	public static ByteBuffer[] sparkleAnim;
 	public static ByteBuffer[] rotorAnim;
 	public static ByteBuffer[] springPoleFastAnim;
 	public static ByteBuffer[] springPoleSlowAnim;
-	
 	public static ByteBuffer leafBG0;
 	public static ByteBuffer leafBG1;
 	public static ByteBuffer leafBG2;
-	
 	public static ByteBuffer windowIcon2;
 	public static ByteBuffer windowIcon3;
-	
 	public static ByteBuffer start0;
 	public static ByteBuffer start1;
 	public static ByteBuffer start2;
 	public static ByteBuffer start3;
-	
 	public static ByteBuffer pause1;
 	public static ByteBuffer pause2;
 	public static ByteBuffer pause3;
-	
 	public static ByteBuffer font;
-	
 	public static ByteBuffer singleplayerWhiteSprite;
 	public static ByteBuffer singleplayerYellowSprite;
 	public static ByteBuffer multiplayerWhiteSprite;
@@ -165,30 +119,23 @@ public class Loader {
 	public static ByteBuffer timeAttackYellowSprite;
 	public static ByteBuffer optionsWhiteSprite;
 	public static ByteBuffer optionsYellowSprite;
-	
 	public static ByteBuffer leafLayer1;
 	public static ByteBuffer leafLayer2;
-	
 	public static ByteBuffer[] hudRingAnim;
 	public static ByteBuffer hud;
 	public static ByteBuffer time;
 	public static ByteBuffer[] numbers;
 	public static ByteBuffer[] redNumbers;
-	
 	public static ByteBuffer itemBox;
 	public static ByteBuffer ramp;
-	
 	public static ByteBuffer fade;
 	public static ByteBuffer title;
 	public static ByteBuffer leftCloud;
 	public static ByteBuffer rightCloud;
 	public static ByteBuffer pressStart;
-	
 	public static ByteBuffer[] spinnerAnim;
 	public static ByteBuffer[] explosionAnim;
-	
 	public static Image testBuffer;
-	
 	public static Clip jumpSound0;
 	public static Clip jumpSound1;
 	public static Clip landSound;
@@ -204,70 +151,57 @@ public class Loader {
 	public static Clip trickSound;
 	public static Clip boostSound;
 	public static Clip dashSound;
-	
 	public static Clip voice3;
 	public static Clip voice2;
 	public static Clip voice1;
 	public static Clip voiceGo;
-	
 	public static Clip ringSound;
 	public static Clip springSound;
 	public static Clip popSound;
 	public static Clip springPoleSound;
-	
 	public static Clip leaf1Music;
 	public static Clip titleScreenMusic;
-	
 	public static Clip pauseSound;
 	public static Clip titleSound;
 	public static Clip forwardSound;
 	public static Clip backSound;
 	public static Clip moveSound;
 	public static Clip inaccessibleSound;
-	
 	public static int debugMode;
 	
-	public static void main(String[] args) {
-		if(args.length > 0) {
-			if(args[0].equals("debug")) {
-				if(args[1].equals("leaf1")) {
-					debugMode = 1;
-					
-					joyUp = 1;
-					joyDown = 1;
-					joyLeft = 0;
-					joyRight = 0;
-					joyA = 0;
-					joyB = 1;
-					joyX = 2;
-					joyY = 3;
-					joyStart = 6;
-					joyBack = 7;
-					
-					joyUpAxis = -1;
-					joyDownAxis = 1;
-					joyLeftAxis = -1;
-					joyRightAxis = 1;
-				}
-			}
+	public static void main(String[] args){
+		if(args.length > 0) if(args[0].equals("debug")) if(args[1].equals("leaf1")){
+			debugMode = 1;
+			joyUp = 1;
+			joyDown = 1;
+			joyLeft = 0;
+			joyRight = 0;
+			joyA = 0;
+			joyB = 1;
+			joyX = 2;
+			joyY = 3;
+			joyStart = 6;
+			joyBack = 7;
+			joyUpAxis = -1;
+			joyDownAxis = 1;
+			joyLeftAxis = -1;
+			joyRightAxis = 1;
 		}
-		
 		get().init();
 		Window.get().run();
 	}
-
-	public static Loader get() {
-		if(singleton == null) {singleton = new Loader();}
-		return(singleton);
+	
+	public static Loader get(){
+		if(singleton == null) singleton = new Loader();
+		return singleton;
 	}
 	
-	private void init() {
+	private void init(){
 		fade = loadImage("/objectsprites/fade.png");
 		title = loadImage("/objectsprites/title.png");
 		leftCloud = loadImage("/objectsprites/cloudLeft.png");
 		rightCloud = loadImage("/objectsprites/cloudRight.png");
 		pressStart = loadImage("/objectsprites/start.png");
-		
 		idleAnim = loadImages("/sonicsprites", "idle");
 		runSlowestAnim = loadImages("/sonicsprites", "slowest");
 		runSlowAnim = loadImages("/sonicsprites", "slow");
@@ -301,11 +235,9 @@ public class Loader {
 		backflipAnim = loadImages("/sonicsprites", "backFlip");
 		helixAnim = loadImages("/sonicsprites", "helix");
 		grindAnim = loadImages("/sonicsprites", "grind");
-		
 		spindashDustAnim = loadImages("/sonicsprites", "dust");
 		spindashChargeDustAnim = loadImages("/sonicsprites", "chargeDust");
 		doubleShieldAnim = loadImages("/sonicsprites", "doubleShield");
-		
 		spring0Anim = loadImages("/objectsprites", "spring0");
 		spring1Anim = loadImages("/objectsprites", "spring1");
 		spring2Anim = loadImages("/objectsprites", "spring2");
@@ -318,10 +250,8 @@ public class Loader {
 		spring9Anim = loadImages("/objectsprites", "spring9");
 		spring10Anim = loadImages("/objectsprites", "spring10");
 		spring11Anim = loadImages("/objectsprites", "spring11");
-		
 		blueSpring0Anim = loadImages("/objectsprites", "blueSpring0");
 		blueSpring1Anim = loadImages("/objectsprites", "blueSpring1");
-		
 		dashPad = loadImages("/objectsprites", "dashPad");
 		itemBox = loadImage("/objectsprites/itemBox.png");
 		ramp = loadImage("/objectsprites/ramp.png");
@@ -330,7 +260,6 @@ public class Loader {
 		rotorAnim = loadImages("/objectsprites", "rotor");
 		springPoleFastAnim = loadImages("/objectsprites", "springPole");
 		springPoleSlowAnim = loadImages("/objectsprites", "springPoleSlow");
-		
 		jumpSound0 = loadSound("/sonicsounds/jump0.wav", -15.0f);
 		jumpSound1 = loadSound("/sonicsounds/jump1.wav", -10.0f);
 		landSound = loadSound("/sonicsounds/land.wav", -10.0f);
@@ -346,134 +275,114 @@ public class Loader {
 		trickSound = loadSound("/sonicsounds/trick.wav", -10.0f);
 		boostSound = loadSound("/sonicsounds/boost.wav", -10.0f);
 		dashSound = loadSound("/sonicsounds/dash.wav", -10.0f);
-		
 		voice3 = loadSound("/voiceclips/3.wav", -10.0f);
 		voice2 = loadSound("/voiceclips/2.wav", -10.0f);
 		voice1 = loadSound("/voiceclips/1.wav", -10.0f);
 		voiceGo = loadSound("/voiceclips/go.wav", -10.0f);
-		
 		titleScreenMusic = loadSound("/objectsounds/titleScreen.wav", -20.0f);
 		leaf1Music = loadSound("/maps/leaf1.wav", -20.0f);
-		
 		pauseSound = loadSound("/objectsounds/pause.wav", -10.0f);
 		titleSound = loadSound("/objectsounds/title.wav", -10.0f);
 		forwardSound = loadSound("/objectsounds/forward.wav", -10.0f);
 		backSound = loadSound("/objectsounds/back.wav", -10.0f);
 		moveSound = loadSound("/objectsounds/move.wav", -10.0f);
 		inaccessibleSound = loadSound("/objectsounds/inaccessible.wav", -10.0f);
-		
 		ringSound = loadSound("/objectsounds/ring.wav", -10.0f);
 		springSound = loadSound("/objectsounds/spring.wav", -10.0f);
 		popSound = loadSound("/objectsounds/pop.wav", -10.0f);
 		springPoleSound = loadSound("/objectsounds/springPole.wav", -10.0f);
-		
 		hudRingAnim = loadImages("/hudsprites", "ring");
-		
 		leafBG0 = loadImage("/maps/bg20.png");
 		leafBG1 = loadImage("/maps/bg21.png");
 		leafBG2 = loadImage("/maps/bg22.png");
-		
-		singleplayerWhiteSprite =  loadImage("/menusprites/singleplayerWhite.png");
+		singleplayerWhiteSprite = loadImage("/menusprites/singleplayerWhite.png");
 		singleplayerYellowSprite = loadImage("/menusprites/singleplayerYellow.png");
-		multiplayerWhiteSprite =   loadImage("/menusprites/multiplayerWhite.png");
-		multiplayerYellowSprite =  loadImage("/menusprites/multiplayerYellow.png");
-		gameStartWhiteSprite =     loadImage("/menusprites/gameStartWhite.png");
-		gameStartYellowSprite =    loadImage("/menusprites/gameStartYellow.png");
-		timeAttackWhiteSprite =    loadImage("/menusprites/timeAttackWhite.png");
-		timeAttackYellowSprite =   loadImage("/menusprites/timeAttackYellow.png");
-		optionsWhiteSprite =       loadImage("/menusprites/optionsWhite.png");
-		optionsYellowSprite =      loadImage("/menusprites/optionsYellow.png");
-		
+		multiplayerWhiteSprite = loadImage("/menusprites/multiplayerWhite.png");
+		multiplayerYellowSprite = loadImage("/menusprites/multiplayerYellow.png");
+		gameStartWhiteSprite = loadImage("/menusprites/gameStartWhite.png");
+		gameStartYellowSprite = loadImage("/menusprites/gameStartYellow.png");
+		timeAttackWhiteSprite = loadImage("/menusprites/timeAttackWhite.png");
+		timeAttackYellowSprite = loadImage("/menusprites/timeAttackYellow.png");
+		optionsWhiteSprite = loadImage("/menusprites/optionsWhite.png");
+		optionsYellowSprite = loadImage("/menusprites/optionsYellow.png");
 		windowIcon2 = loadImage("/objectsprites/windowIcon2.png");
 		windowIcon3 = loadImage("/objectsprites/windowIcon3.png");
-		
 		font = loadImage("/menusprites/font.png");
-		
 		start0 = loadImage("/hudsprites/start.png");
 		start1 = loadImage("/hudsprites/_1.png");
 		start2 = loadImage("/hudsprites/_2.png");
 		start3 = loadImage("/hudsprites/_3.png");
-		
 		pause1 = loadImage("/hudsprites/pause1.png");
 		pause2 = loadImage("/hudsprites/pause2.png");
 		pause3 = loadImage("/hudsprites/pause3.png");
-		
 		leafLayer1 = loadImage("/maps/Leaf_Forest_Act_1.png");
 		leafLayer2 = loadImage("/maps/Leaf_Forest_Act_1.png");
-		
 		hud = loadImage("/hudsprites/rings.png");
 		time = loadImage("/hudsprites/time.png");
-			
 		numbers = loadImages("/hudsprites", "");
 		redNumbers = loadImages("/hudsprites", "red");
-		
 		spinnerAnim = loadImages("/badniksprites", "spinner");
 		explosionAnim = loadImages("/objectsprites", "explosion");
 	}
 	
-	private ByteBuffer[] loadImages(String dir, String name) {
+	private ByteBuffer[] loadImages(String dir, String name){
 		int length = 0;
-		
-		while(true) {
+		while(true){
 			InputStream is = getClass().getResourceAsStream(dir + "/" + name + length + ".png");
-			if(is == null) {break;}
-			
+			if(is == null) break;
 			length++;
 		}
-		
 		ByteBuffer[] images = new ByteBuffer[length];
-		
-		try {
-			for(int i = 0; i < length; i++) {
+		try{
+			for(int i = 0; i < length; i++){
 				InputStream is = getClass().getResourceAsStream(dir + "/" + name + i + ".png");
-				byte[] bytes = is.readAllBytes();
-				
+				byte[] bytes = new byte[is.available()];
+				is.read(bytes);
 				ByteBuffer imageBuffer = BufferUtils.createByteBuffer(bytes.length);
 				imageBuffer.put(bytes);
 				imageBuffer.flip();
-				
 				images[i] = imageBuffer;
 			}
 		}
-		catch(Exception e) {e.printStackTrace();}
-		
-		return(images);
+		catch(Exception ex){
+			ex.printStackTrace();
+		}
+		return images;
 	}
-	public ByteBuffer loadImage(String path) {
+	
+	public ByteBuffer loadImage(String path){
 		ByteBuffer out = null;
-		
-		try {
+		try{
 			InputStream is = getClass().getResourceAsStream(path);
-			byte[] bytes = is.readAllBytes();
-			
+			byte[] bytes = new byte[is.available()];
+			is.read(bytes);
 			ByteBuffer imageBuffer = BufferUtils.createByteBuffer(bytes.length);
 			imageBuffer.put(bytes);
 			imageBuffer.flip();
-			
 			out = imageBuffer;
 		}
-		catch(Exception e) {e.printStackTrace();}
-		
-		return(out);
+		catch(Exception ex){
+			ex.printStackTrace();
+		}
+		return out;
 	}
 	
-	private Clip loadSound(String path, float amp) {
+	private Clip loadSound(String path, float amp){
 		Clip sound = null;
-		try {
+		try{
 			InputStream is = getClass().getResourceAsStream(path);
 			BufferedInputStream bis = new BufferedInputStream(is);
 			AudioInputStream ais = AudioSystem.getAudioInputStream(bis);
-			
 			sound = AudioSystem.getClip();
 			sound.open(ais);
 		}
-		catch (Exception e) {
+		catch(Exception ex){
 			System.err.println("Faied to load sound '" + path + "'");
-			e.printStackTrace();
+			ex.printStackTrace();
 		}
 		FloatControl gainControl = (FloatControl)sound.getControl(FloatControl.Type.MASTER_GAIN);
 		gainControl.setValue(amp);
-		
-		return(sound);
+		return sound;
 	}
+	
 }

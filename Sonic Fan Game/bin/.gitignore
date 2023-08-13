@@ -1,8 +1,10 @@
-/datatypes/
-/functionholders/
+/objectsprites/
+/shaders/
 /sonicsounds/
 /sonicsprites/
 /badniks/
+/datatypes/
+/functionholders/
 /main/
 /misc/
 /objects/
@@ -11,3 +13,4 @@
 /scenes/
 /shapes/
 /voiceclips/
+/maps/
