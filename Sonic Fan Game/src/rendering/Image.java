@@ -6,13 +6,11 @@ import java.nio.ByteBuffer;
 
 public class Image{
 	
-	private int vaoID;
-	private int vboID;
-	private int eboID;
-	public Texture tex;
 	public float[] vertexArray = {0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1, 1, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0, 0, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1, 0, 0.0f, 0.0f,
 		0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0, 1};
 	private int[] elementArray = {2, 1, 0, 0, 1, 3};
+	private int vaoID, vboID, eboID;
+	public Texture tex;
 	
 	public Image(String filepath){ tex = new Texture(filepath); }
 	

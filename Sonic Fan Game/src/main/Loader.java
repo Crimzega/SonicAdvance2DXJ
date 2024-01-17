@@ -380,6 +380,7 @@ public class Loader{
 			System.err.println("Faied to load sound '" + path + "'");
 			ex.printStackTrace();
 		}
+		if(sound == null) throw new NullPointerException("The sound was not found.");
 		FloatControl gainControl = (FloatControl)sound.getControl(FloatControl.Type.MASTER_GAIN);
 		gainControl.setValue(amp);
 		return sound;
