@@ -72,7 +72,7 @@ public class Window{
 		IntBuffer width = BufferUtils.createIntBuffer(1);
 		IntBuffer height = BufferUtils.createIntBuffer(1);
 		IntBuffer channels = BufferUtils.createIntBuffer(1);
-		ByteBuffer imageBuffer = stbi_load_from_memory(Loader.windowIcon2, width, height, channels, 0);
+		ByteBuffer imageBuffer = stbi_load_from_memory(Loader.windowIcon3, width, height, channels, 0);
 		GLFWImage image = GLFWImage.create();
 		GLFWImage.Buffer imagebf = GLFWImage.create(1);
 		image.set(width.get(0), height.get(0), imageBuffer);

@@ -354,12 +354,14 @@ public class Loader{
 		ByteBuffer out = null;
 		try{
 			InputStream is = getClass().getResourceAsStream(path);
-			byte[] bytes = new byte[is.available()];
-			is.read(bytes);
-			ByteBuffer imageBuffer = BufferUtils.createByteBuffer(bytes.length);
-			imageBuffer.put(bytes);
-			imageBuffer.flip();
-			out = imageBuffer;
+			if(is != null){
+				byte[] bytes = new byte[is.available()];
+				is.read(bytes);
+				ByteBuffer imageBuffer = BufferUtils.createByteBuffer(bytes.length);
+				imageBuffer.put(bytes);
+				imageBuffer.flip();
+				out = imageBuffer;
+			}
 		}
 		catch(Exception ex){
 			ex.printStackTrace();
@@ -371,10 +373,12 @@ public class Loader{
 		Clip sound = null;
 		try{
 			InputStream is = getClass().getResourceAsStream(path);
-			BufferedInputStream bis = new BufferedInputStream(is);
-			AudioInputStream ais = AudioSystem.getAudioInputStream(bis);
-			sound = AudioSystem.getClip();
-			sound.open(ais);
+			if(is != null){
+				BufferedInputStream bis = new BufferedInputStream(is);
+				AudioInputStream ais = AudioSystem.getAudioInputStream(bis);
+				sound = AudioSystem.getClip();
+				sound.open(ais);
+			}
 		}
 		catch(Exception ex){
 			System.err.println("Faied to load sound '" + path + "'");

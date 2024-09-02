@@ -3,10 +3,10 @@ package rendering;
 import static functionholders.ListFunctions.*;
 
 public class Renderer{
-	
+
 	private RenderBatch[] batches;
 	private int batchIndex;
-	
+
 	public Renderer(){
 		batches = null;
 		batchIndex = 0;
@@ -15,12 +15,12 @@ public class Renderer{
 			batches[batches.length - 1].load();
 		}
 	}
-	
+
 	public void reset(){
-		if(batches != null){ for(int i = 0; i < batches.length; i++){ batches[i].reset(); } }
+		if(batches != null) for(int i = 0; i < batches.length; i++) batches[i].reset();
 		batchIndex = 0;
 	}
-	
+
 	public void add(Image image){
 		if(batches == null){
 			batches = append(batches, new RenderBatch());
@@ -41,7 +41,7 @@ public class Renderer{
 		}
 		batches[batchIndex].add(image);
 	}
-	
+
 	public void draw(Shader shader, Camera camera){ if(batches != null) for(int i = 0; i < batches.length; i++) batches[i].draw(shader, camera); }
-	
+
 }

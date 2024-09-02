@@ -6,8 +6,6 @@ import static org.lwjgl.opengl.GL11.*;
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
 
-import org.lwjgl.BufferUtils;
-
 public class ImageHandler{
 	
 	public static void renderImage(float x, float y, int texId){

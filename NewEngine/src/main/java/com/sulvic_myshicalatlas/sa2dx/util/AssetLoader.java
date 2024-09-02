@@ -13,8 +13,6 @@ import javax.sound.sampled.*;
 import org.lwjgl.glfw.GLFWImage;
 
 import com.sulvic.engine.util.AssetLocation;
-import com.sulvic.io.*;
-import com.sulvic_myshicalatlas.sa2dx.client.texture.CharacterImage;
 
 public class AssetLoader{
 	
@@ -43,8 +41,6 @@ public class AssetLoader{
 		return img;
 	}
 	
-	private static String formatCharacterImagePath(AssetLocation assetLoc, String animName){ return format("/assets/{}/data/{}/{}.cbd", assetLoc.getDomain(), assetLoc.getPath(), animName); }
-	
 	private static String formatSoundPath(AssetLocation assetLoc){ return format("/assets/{}/sounds/{}.wav", assetLoc.getDomain(), assetLoc.getPath()); }
 	
 	private static String formatTexturePath(AssetLocation assetLoc){ return format("/assets/{}/textures/{}.png", assetLoc.getDomain(), assetLoc.getPath()); }
@@ -52,30 +48,6 @@ public class AssetLoader{
 	protected static InputStream getResourceStream(String pathName){ return AssetLoader.class.getResourceAsStream(pathName); }
 	
 	protected static String formatPalettePath(AssetLocation assetLoc){ return format("/assets/{}/palette/{}.pal", assetLoc.getDomain(), assetLoc.getPath()); }
-	
-	public static CharacterImage getCharacterImage(AssetLocation paletteLoc, String animName){
-		try{
-			ImagePalette palette = ImagePalette.loadPalette(paletteLoc);
-			EndianInputStream stream = new EndianInputStream(getResourceStream(formatCharacterImagePath(paletteLoc, animName)), Endian.LITTLE);
-			int width = stream.readInt();
-			int height = stream.readInt();
-			int frames = stream.readInt();
-			int[] frameTimeouts = new int[frames];
-			byte[][] data = new byte[frames][64];
-			for(int i = 0; i < frames; i++){
-				frameTimeouts[i] = stream.readInt();
-				stream.read(data[i]);
-			}
-			CharacterImage charImage = CharacterImage.newCharacterImage(ImageChunker.parseImageData(width, height, frames, palette, data), frameTimeouts);
-			if(stream.available() == 4) charImage.setRepeatFrame(stream.readInt());
-			stream.close();
-			return charImage;
-		}
-		catch(IOException ex){
-			ex.printStackTrace();
-			return (CharacterImage)null;
-		}
-	}
 	
 	public static GLFWImage.Buffer getIcon(){
 		GLFWImage.Buffer buffer = GLFWImage.malloc(1);
